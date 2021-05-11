@@ -1,0 +1,15 @@
+template_dir templates
+output_dir out
+
+match index.html
+    output
+end
+
+match *.html
+    template template.html
+    output
+end
+
+match *.png
+    shell convert $path -resize 400x400 $output_dir/$file
+end
