@@ -4,27 +4,27 @@
     probably not. but it is kinda interesting, so here it is:
 </p>
 <p>
-    instead of numbers or smth, all literals are objects, written as `(T param*)`, where `T` is the
-    type name and `param` is either variable, or another literal. there are two operators for objects:
-    `?` and `!`. `(T x)?` has two meanings: if used as an expression, it returns true if the object
-    with type `T` and parameters `(x)` exists. if used as a standalone statement, it declares that that
-    object exists. `!` is the same, but for nonexistence. writing `(T x)!` as a standalone statement declares
-    that the object `(T x)` does not exist. `(T x)!` as an expression checks if `(T x)` exists.
+    instead of numbers or smth, all literals are objects, written as <code>(T param*)</code>, where <code>T</code> is the
+    type name and <code>param</code> is either variable, or another literal. there are two operators for objects:
+    <code>?</code> and <code>!</code>. <code>(T x)?</code> has two meanings: if used as an expression, it returns true if the object
+    with type <code>T</code> and parameters <code>(x)</code> exists. if used as a standalone statement, it declares that that
+    object exists. <code>!</code> is the same, but for nonexistence. writing <code>(T x)!</code> as a standalone statement declares
+    that the object <code>(T x)</code> does not exist. <code>(T x)!</code> as an expression checks if <code>(T x)</code> exists.
 </p>
 <p>
-    there is one special object, `M`: it is used for pattern matching. if an object `(M x y)` exists, then `y`
-    matches the pattern `x`. the definition of `M` is:
+    there is one special object, <code>M</code>: it is used for pattern matching. if an object <code>(M x y)</code> exists, then <code>y</code>
+    matches the pattern <code>x</code>. the definition of <code>M</code> is:
 </p>
 <pre>
 (M x x)?
 (M x y)!
 </pre>
 <p>
-    this just says that for all values of `x`, `(M x x)` exists, but `(M x y)` does not, for all values of `y`
-    distinct from `x`.
+    this just says that for all values of <code>x</code>, <code>(M x x)</code> exists, but <code>(M x y)</code> does not, for all values of <code>y</code>
+    distinct from <code>x</code>.
 </p>
 <p>
-    now we get to `\'`, the lambda prime combinator. it is written as follows:
+    now we get to <code>\'</code>, the lambda prime combinator. it is written as follows:
 </p>
 <pre>
               / y    if (Max)?
@@ -32,8 +32,8 @@
               \ z    if (Max)!
 </pre>
 <p>
-    here, `.` is the function application operator. thus, lambda prime acts as an if statement of sorts: it compares
-    `x` and `a`, using `y` as the `then` branch and `z` as the `else`.
+    here, <code>.</code> is the function application operator. thus, lambda prime acts as an if statement of sorts: it compares
+    <code>x</code> and <code>a</code>, using <code>y</code> as the <code>then</code> branch and <code>z</code> as the <code>else</code>.
 </p>
 <p>
     lambda prime can be shown to be equivalent to lambda calculus this way:
@@ -43,7 +43,7 @@ xy = x.y
 \x.y = (\'(Mx).y.(N))
 </pre>
 <p>
-    here `N` is used to represent a nil type, but anything can be used.
+    here <code>N</code> is used to represent a nil type, but anything can be used.
 </p>
 <h2>footnote: stack stuff</h2>
 <p>
@@ -62,22 +62,22 @@ xy = x.y
 (Po) = (\' (M (St x y)).(P x y).N)
 </pre>
 <p>
-    this defines several objects: `(St x y)`, a `head:tail` like stack and `(Bt x)`, representing the bottom of a stack. a full
+    this defines several objects: <code>(St x y)</code>, a <code>head:tail</code> like stack and <code>(Bt x)</code>, representing the bottom of a stack. a full
     stack might be, for example:
 </p>
 <pre>
 (St 1 (St 2 (St 3 (Bt 4)))) 
 </pre>
 <p>
-    then we have `(Ps x)`, the push operation. it is both an object and a function: think of it like a generic. it is used as follows:
+    then we have <code>(Ps x)</code>, the push operation. it is both an object and a function: think of it like a generic. it is used as follows:
 </p>
 <pre>
 (Ps item).stack
 </pre>
 <p>
-    it returns a new stack, with `item` at the top.
+    it returns a new stack, with <code>item</code> at the top.
 </p>
 <p>
-    then we have the `(Po)` operation. It is applied to a stack, and returns a pair: the first element is the popped item, the second is
+    then we have the <code>(Po)</code> operation. It is applied to a stack, and returns a pair: the first element is the popped item, the second is
     the new stack.
 </p>
